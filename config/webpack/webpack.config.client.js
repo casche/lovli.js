@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const chalk = require('chalk');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const WebpackAnybarPlugin = require('webpack-anybar-plugin').default;
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const basePath = path.join(__dirname, '../../source');
 const buildPath = path.join(__dirname, '../../.build');
 const staticPath = path.join(__dirname, '../../static');
@@ -54,10 +54,13 @@ module.exports = {
         loader : 'json'
       },
       {
-        // vendor css can be put into the "static/vendor" folder, it won't be localized then
-        test: /\.(css)$/,
-        loader: 'style!css',
-        include: path.join(staticPath, 'vendor')
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+        exclude: basePath
+      },
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url'
       },
       {
         name: 'local-css-config',
@@ -99,6 +102,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new WebpackAnybarPlugin({
       port: 1738
-    })
+    }),
+    new ExtractTextPlugin('bundle.css')
   ]
 };

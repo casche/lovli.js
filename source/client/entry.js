@@ -25,6 +25,7 @@ if (module.hot) {
   module.hot.accept('./containers/Root', () => {
     const root = require('./containers/Root').default;
     ReactDOM.render(
+
       <AppContainer><root /></AppContainer>,
       rootElement
     );

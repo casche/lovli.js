@@ -4,17 +4,19 @@ import Logo from './Logo';
 import TodoList from './todos/TodoList';
 import AddTodoButton from './todos/AddTodoButton';
 
-import 'static/vendor/font-awesome/css/font-awesome.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import styles from 'styles/app';
 
 const App = () => (
   <div>
     <div className={styles.container}>
       <Logo />
+        <div className="page-header text-center">
+          <h1>Welcome.<small>You're connected to <a href="https://github.com/rethinkdb/horizon" target="_blank">horizon</a></small></h1>
+        </div>
       <p className={styles.tCenter}>
-        <b>Welcome.</b>
-        <br />
-        You're connected to <a href="https://github.com/rethinkdb/horizon" target="_blank">horizon</a>.
       </p>
       <TodoList limit={100} />
       <AddTodoButton />
